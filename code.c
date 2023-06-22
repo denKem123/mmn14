@@ -139,7 +139,7 @@ void get_opcode_func(char *cmd, opcode *opcode_out)
 addressing_type get_addressing_type(char *operand)
 {
 	/* if nothing, just return none */
-	if (operand[0] == '\0')
+	if (operand == NULL || operand[0] == '\0')
 		return NONE_ADDR;
 	/* if first char is 'r', second is number in range 0-7 and third is end of string, it's a register */
 	if (operand[0] == '@' && operand[1] == 'r' && operand[2] >= '0' && operand[2] <= '7' && operand[3] == '\0')
@@ -166,7 +166,7 @@ addressing_type get_addressing_type(char *operand)
 bool validate_operand_by_opcode(line_info line, addressing_type first_addressing,
 								addressing_type second_addressing, opcode curr_opcode, int op_count)
 {
-	if (curr_opcode == MOV_OP  || curr_opcode == CMP_OP || curr_opcode == ADD_OP || curr_opcode == SUB_OP ||curr_opcode == LEA_OP )
+	if (curr_opcode == MOV_OP || curr_opcode == CMP_OP || curr_opcode == ADD_OP || curr_opcode == SUB_OP || curr_opcode == LEA_OP)
 	{
 		/* 2 operands required */
 		if (op_count != 2)
@@ -191,9 +191,8 @@ bool validate_operand_by_opcode(line_info line, addressing_type first_addressing
 			return validate_op_addr(line, first_addressing, second_addressing, 3, 2, IMMEDIATE_ADDR, DIRECT_ADDR, REGISTER_ADDR,
 									DIRECT_ADDR, REGISTER_ADDR);
 		}
-		
 	}
-	else if (curr_opcode == NOT_OP  || curr_opcode == CLR_OP || (curr_opcode >= INC_OP && curr_opcode <= JSR_OP) )
+	else if (curr_opcode == NOT_OP || curr_opcode == CLR_OP || (curr_opcode >= INC_OP && curr_opcode <= JSR_OP))
 	{
 		/* 1 operand required */
 		if (op_count != 1)
@@ -337,8 +336,7 @@ reg get_register_by_name(char *name)
 
 data_word *build_data_word(addressing_type addressing, long data, bool is_extern_symbol)
 {
-	signed long mask;				/* For bitwise operations for data conversion */
-	unsigned long ARE = 4, mask_un; /* 4 = 2^2 = 1 << 2 */
+	unsigned long ARE = 0; /* 4 = 2^2 = 1 << 2 */
 	data_word *dataword = malloc_with_check(sizeof(data_word));
 
 	if (addressing == DIRECT_ADDR)
@@ -347,10 +345,6 @@ data_word *build_data_word(addressing_type addressing, long data, bool is_extern
 	}
 	dataword->ARE = ARE; /* Set ARE field value */
 
-	/* Now all left is to encode the data */
-	mask = -1;
-	mask_un = mask;					 /* both hold 11...11 */
-	mask_un >>= 11;					 /* Now mask_un holds 0..001111....111, 11 zeros and 21 ones */
-	dataword->data = mask_un & data; /* Now just the 21 lsb bits area left and assigned to data field. */
+	dataword->data = data; 
 	return dataword;
 }
