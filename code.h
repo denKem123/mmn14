@@ -5,12 +5,11 @@
 #include "globals.h"
 
 /**
- * Detects the opcode and the funct of a command by it's name
+ * Detects the opcode of a command by it's name
  * @param cmd The command name (string)
  * @param opcode_out The opcode value destination
- * @param funct_out The funct value destination
  */
-void get_opcode_func(char* cmd, opcode *opcode_out, funct *funct_out);
+void get_opcode_func(char* cmd, opcode *opcode_out);
 
 /**
  * Returns the addressing type of an operand
@@ -20,14 +19,13 @@ void get_opcode_func(char* cmd, opcode *opcode_out, funct *funct_out);
 addressing_type get_addressing_type(char *operand);
 
 /**
- * Validates and Builds a code word by the opcode, funct, operand count and operand strings
+ * Validates and Builds a code word by the opcode, operand count and operand strings
  * @param curr_opcode The current opcode
- * @param curr_funct The current funct
  * @param op_count The operands count
  * @param operands a 2-cell array of pointers to first and second operands.
  * @return A pointer to code word struct, which represents the code. if validation fails, returns NULL.
  */
-code_word *get_code_word(line_info line, opcode curr_opcode, funct curr_funct, int op_count, char *operands[2]);
+code_word *get_code_word(line_info line, opcode curr_opcode, int op_count, char *operands[2]);
 
 /**
  * Returns the register enum value by it's name

@@ -6,13 +6,29 @@
 #include "utils.h"
 #include "code.h" /* for checking reserved words */
 
-#define ERR_OUTPUT_FILE stderr
+#define ERR_OUTPUT_FILE stderr 
+
 
 char *strallocat(char *s0, char* s1) {
 	char *str = (char *)malloc_with_check(strlen(s0) + strlen(s1) + 1);
 	strcpy(str, s0);
 	strcat(str, s1);
 	return str;
+}
+
+char * strtrim(char *str) {
+    int length = strlen(str);
+    int start = 0;
+    int end = length - 1;
+
+   /*Find the end position by skipping trailing whitespace */
+    while (end > start && (str[end] == '\n' || str[end] == '\t' || str[end] == ' ' || str[end] == '\r')) {
+        end--;
+    }
+
+    /* Null-terminate the trimmed string */
+    str[++end] = '\0';
+    return str;
 }
 
 
@@ -105,9 +121,9 @@ bool is_alphanumeric_str(char *string) {
 }
 
 bool is_reserved_word(char *name) {
-	int fun, opc;
+	int opc;
 	/* check if register or command */
-	get_opcode_func(name, &opc, (funct *) &fun);
+	get_opcode_func(name, &opc);
 	if (opc != NONE_OP || get_register_by_name(name) != NONE_REG || find_instruction_by_name(name) != NONE_INST) return TRUE;
 
 	return FALSE;

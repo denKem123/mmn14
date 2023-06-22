@@ -7,7 +7,7 @@
 
 /** moves the index to the next place in string where the char isn't white */
 #define MOVE_TO_NOT_WHITE(string, index) \
-        for (;string[(index)] && (string[(index)] == '\t' || string[(index)] == ' '); (++(index)))\
+        for (;string[(index)] && (string[(index)] == '\t' || string[(index)] == ' ' || string[(index)] == '\r'); (++(index)))\
         ;
 
 /**
@@ -17,6 +17,13 @@
  * @return A pointer to the new, allocated string
  */
 char *strallocat(char *s0, char* s1);
+
+/**
+ * trim a string
+ * @param s The string
+ * @return the pointer to the string
+ */
+char *strtrim(char *s);
 
 /**
  * Finds the defined label in the code if exists, and saves it into the buffer.

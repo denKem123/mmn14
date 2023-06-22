@@ -40,7 +40,7 @@ bool process_line_fpass(line_info line, long *IC, long *DC, machine_word **code_
 	instruction instruction;
 
 	i = 0;
-
+	line.content = strtrim(line.content);
 	MOVE_TO_NOT_WHITE(line.content, i) /* Move to next non-white char */
 	if (!line.content[i] || line.content[i] == '\n' || line.content[i] == EOF || line.content[i] == ';')
 		return TRUE; /* Empty/Comment line - no errors found (of course) */
@@ -63,6 +63,7 @@ bool process_line_fpass(line_info line, long *IC, long *DC, machine_word **code_
 	}
 
 	MOVE_TO_NOT_WHITE(line.content, i) /* Move to next not-white char */
+
 
 	if (line.content[i] == '\n') return TRUE; /* Label-only line - skip */
 
@@ -150,7 +151,6 @@ static bool process_code(line_info line, int i, long *ic, machine_word **code_im
 	char operation[8]; /* stores the string of the current code instruction */
 	char *operands[2]; /* 2 strings, each for operand */
 	opcode curr_opcode; /* the current opcode and funct values */
-	funct curr_funct;
 	code_word *codeword; /* The current code word */
 	long ic_before;
 	int j, operand_count;
@@ -164,10 +164,10 @@ static bool process_code(line_info line, int i, long *ic, machine_word **code_im
 	}
 	operation[j] = '\0'; /* End of string */
 	/* Get opcode & funct by command name into curr_opcode/curr_funct */
-	get_opcode_func(operation, &curr_opcode, &curr_funct);
+	get_opcode_func(operation, &curr_opcode);
 	/* If invalid operation (opcode is NONE_OP=-1), print and skip processing the line. */
 	if (curr_opcode == NONE_OP) {
-		printf_line_error(line, "Unrecognized instruction: %s.", operation);
+		printf_line_error(line, "Unrecognized instruction: %s", operation);
 		return FALSE; /* an error occurred */
 	}
 
@@ -177,7 +177,7 @@ static bool process_code(line_info line, int i, long *ic, machine_word **code_im
 	}
 
 	/* Build code word struct to store in code image array */
-	if ((codeword = get_code_word(line, curr_opcode, curr_funct, operand_count, operands)) == NULL) {
+	if ((codeword = get_code_word(line, curr_opcode, operand_count, operands)) == NULL) {
 		/* Release allocated memory for operands */
 		if (operands[0]) {
 			free(operands[0]);
