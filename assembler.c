@@ -48,14 +48,14 @@ static bool process_file(char *filename)
 	line_info curr_line_info;
 
 	/* Concat extensionless filename with .as extension */
-	input_filename = strallocat(filename, ".as");
+	input_filename = strallocat(filename, ".am");
 
 	/* Open file, skip on failure */
 	file_des = fopen(input_filename, "r");
 	if (file_des == NULL)
 	{
 		/* if file couldn't be opened, write to stderr. */
-		printf("Error: file \"%s.as\" is inaccessible for reading. skipping it.\n", filename);
+		printf("Error: file \"%s\" is inaccessible for reading. skipping it.\n", input_filename);
 		free(input_filename); /* The only allocated space is for the full file name */
 		return FALSE;
 	}

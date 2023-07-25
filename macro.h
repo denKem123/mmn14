@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "utils.h"
 #define MAX 100
 
 typedef struct Macro {
