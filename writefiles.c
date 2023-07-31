@@ -82,7 +82,7 @@ static bool write_ob(machine_word **code_img, long *data_img, long icf, long dcf
 			}
 			
 			base_64_str = decimal_to_64(val);
-			/* print in bse 64*/
+			/* print in base 64*/
 			fprintf(file_desc, "\n%s", base_64_str);
 			free(base_64_str);
 		}

@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
 		flag = pre_read_file(i, argv, Mhead);
 		if (!flag)
 		{
+			/* spread macro in each file (if exist)*/
 			pre_write_file(i, argv, Mtail);
 			/* foreach argument (file name), send it for full processing. */
 			succeeded = process_file(argv[i]);
@@ -47,7 +48,7 @@ static bool process_file(char *filename)
 	table symbol_table = NULL;
 	line_info curr_line_info;
 
-	/* Concat extensionless filename with .as extension */
+	/* Concat extensionless filename with .am extension */
 	input_filename = strallocat(filename, ".am");
 
 	/* Open file, skip on failure */

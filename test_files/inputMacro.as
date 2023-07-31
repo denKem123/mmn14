@@ -1,11 +1,15 @@
-; file spass_errors.as
+; file inputMacro.as
+
+mcro m1 
+ bne LOOP
+ sub @r1, @r4
+endmcro
 
 MAIN: mov @r3 ,LENGTH
 LOOP: jmp L1
 prn -5
-bne LOOP
-sub @r1, @r4
-bne ENDED
+m1
+bne END
 L1: inc K
 bne LOOP
 END: stop
