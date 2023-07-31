@@ -1,7 +1,7 @@
 # C Project: 12-bit Assembler
 ## About
 This project is an assignment in a C programming course at the open unvieristy (20465). The purpose of this project is to build an assembler for instructions in asssembly language, for an imaginary 12-bit CPU Computer.
-This project was done by [@GuyMichalovitz] and [@AlonAsher].
+This project was done by ###GuyMichalovitz and ###@AlonAsher].
 
 ## Source structure (Modules)
 1. `macro` - contains functions for processing all macro found in file and create new file spreading the macro content.
