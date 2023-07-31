@@ -16,12 +16,12 @@ This project was done by **Guy Michalovitz** and	**Alon Asher**.
 7. `table` - contains definition of table-like linked list data structure.
 8. `utils` - contains general-purposed, project-wide functions.
 
-## Build
+## Build Code
 You may build with several tools:
 1. Using `make` command (Makefile)
 2. Manually (Not recommended): compile each `*.c` file to `*.o` and then compile all to a single executable using `CC`/`GCC`/`CLang` with `-g a.o b.o .... -o exe`
 
-## Usage
+## Run Code
 `./assembler file1 file2 file3 ...`
 Will start the processing of each file (specify WITHOUT extension!). No support for double-quoting file names.
 
