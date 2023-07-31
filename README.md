@@ -1,13 +1,13 @@
 # C Project: 12-bit Assembler
 ## About
-This project is an assignment in a C programming course at the open unvieristy (20465). The purpose of this project is to build an assembler for instructions in asssembly language, for an imaginary 12-bit CPU Computer.
+This project is an assignment in a C programming course at the open university (20465). The purpose of this project is to build an assembler for instructions in assembly language, for an imaginary 12-bit CPU Computer.
 This project was done by **Guy Michalovitz** and	**Alon Asher**.
 
 ## Modules
 1. `assembler` - main function definition, argv & argc processing, single file processing.
 1. `macro` - create new `*.am` file spreading existing macros.
-2. `first_pass` - first run on asssembly instructions.
-3. `second_pass` - second run on asssembly instructions.
+2. `first_pass` - first run on assembly instructions.
+3. `second_pass` - second run on assembly instructions.
 9. `writefiles` - create all output files: `*.ob`, `*.ext` and `*.ent` 
 
 ## Sub Modules
